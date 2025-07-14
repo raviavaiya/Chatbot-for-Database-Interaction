@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Food SQLBot 🍽️</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f9f9f9, #e9ecef);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      justify-content: center;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 600px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #6c63ff;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #5848d6;
+    }
+
+    pre {
+      background-color: #f0f0f0;
+      padding: 12px;
+      border-radius: 8px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-size: 16px;
+      color: #333;
+    }
+
+    #answer {
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Food SQLBot 🍛</h2>
+    <input type="text" id="question" placeholder="e.g. List top 5 Gujarati dishes by rating" />
+    <button onclick="ask()">Ask</button>
+    <pre id="answer">Answer will appear here...</pre>
+  </div>
+
+  <script>
+    async function ask() {
+      const q = document.getElementById("question").value;
+      const answerBox = document.getElementById("answer");
+      answerBox.innerText = "⏳ Thinking...";
+      try {
+        const res = await fetch("/ask", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ question: q })
+        });
+        const data = await res.json();
+        answerBox.innerText = data.answer;
+      } catch (err) {
+        answerBox.innerText = "⚠️ Error occurred: " + err.message;
+      }
+    }
+  </script>
+</body>
+</html>
