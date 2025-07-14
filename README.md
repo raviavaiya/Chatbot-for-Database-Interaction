@@ -2,8 +2,6 @@
 
 A **FastAPI + LangChain-powered chatbot** that lets you ask natural language questions about **Indian cuisine** and get accurate responses using **SQL over PostgreSQL** and **Google Gemini**.
 
-<img align="right" alt="Food UI" width="400" src="="https://github.com/raviavaiya/Chatbot-for-Database-Interaction/blob/main/feedback%20pic.jpg">
-
 ---
 
 ## 🚀 Features
